@@ -1,0 +1,3 @@
+rna = dna.gsub!(/T/, /U/)	      |	rna = dna.gsub!(/T/, "U")
+print "Here "is the starting DNA:\t"  |	print "Here is the starting DNA:\t"
+puts "#{rna)\n"			      |	puts "#{rna}\n"

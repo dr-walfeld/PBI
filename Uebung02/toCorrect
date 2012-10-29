@@ -1,0 +1,5 @@
+dna = 'ACGAATT\tACTTTAGC'	      |	dna = 'ACGAATT ACTTTAGC'
+rna = dna.gsub!(/T/, "U")	      |	rna = dna.gsub(/T/, "U")
+print "Here is the starting DNA:\t"   |	print "Here is the starting DNA: "
+print "#{dna}\n\n"		      |	print "#{dna}\n"
+print "Here is the result:\n\n"	      |	print "Here is the result: "
