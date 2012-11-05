@@ -2,9 +2,7 @@
 
 def revertfile (content)
   content.reverse.each do |line|
-    puts "#{line}"
     line.chomp!
-    puts "#{line}"
     line.reverse!
     puts "#{line}"
   end

@@ -1,5 +1,6 @@
 #! /usr/bin/env ruby
 
+# gibt Array mit Zeilen umgekehrt aus
 def revertfile (content)
   content.reverse.each do |line|
     line.chomp!
@@ -8,12 +9,14 @@ def revertfile (content)
   end
 end
 
+# Argumente uebergeben?
 if ARGV.empty?
   filelist = ["testfile"]
 else
   filelist = ARGV
 end
 
+# Iteration ueber Dateiliste
 filelist.each do |filename|
   puts "Reverse Ausgabe der Datei '#{filename}':"
   puts "---------------------------------------------------------------------"
