@@ -4,9 +4,7 @@
 def revertfile (content)
   if content.respond_to? "each" and content.respond_to? "reverse"
     content.reverse.each do |line|
-      line.chomp!
-      line.reverse!
-      puts "#{line}"
+      puts line.chomp.reverse
     end
   end
 end
@@ -20,8 +18,8 @@ end
 
 # Iteration ueber Dateiliste
 filelist.each do |filename|
-  puts "Reverse Ausgabe der Datei '#{filename}':"
-  puts "---------------------------------------------------------------------"
+  #puts "Reverse Ausgabe der Datei '#{filename}':"
+  #puts "---------------------------------------------------------------------"
   begin
     contentfile = File.open(filename, "r")
   rescue
@@ -31,6 +29,6 @@ filelist.each do |filename|
   content = contentfile.readlines
   revertfile(content)
   contentfile.close
-  puts "---------------------------------------------------------------------"
-  puts "---------------------------------------------------------------------"
+  #puts "---------------------------------------------------------------------"
+  #puts "---------------------------------------------------------------------"
 end 

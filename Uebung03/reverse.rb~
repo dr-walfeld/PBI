@@ -4,9 +4,7 @@
 def revertfile (content)
   if content.respond_to? "each" and content.respond_to? "reverse"
     content.reverse.each do |line|
-      line.chomp!
-      line.reverse!
-      puts "#{line}"
+      puts line.chomp.reverse
     end
   end
 end
