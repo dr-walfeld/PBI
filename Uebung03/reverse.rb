@@ -2,10 +2,12 @@
 
 # gibt Array mit Zeilen umgekehrt aus
 def revertfile (content)
-  content.reverse.each do |line|
-    line.chomp!
-    line.reverse!
-    puts "#{line}"
+  if content.respond_to? "each" and content.respond_to? "reverse"
+    content.reverse.each do |line|
+      line.chomp!
+      line.reverse!
+      puts "#{line}"
+    end
   end
 end
 
@@ -26,9 +28,9 @@ filelist.each do |filename|
     STDERR.puts "FEHLER: Datei #{filename} konnte nicht geoeffnet werden!"
     exit 1
   end
-    content = contentfile.readlines
-    revertfile(content)
-    contentfile.close
+  content = contentfile.readlines
+  revertfile(content)
+  contentfile.close
   puts "---------------------------------------------------------------------"
   puts "---------------------------------------------------------------------"
 end 

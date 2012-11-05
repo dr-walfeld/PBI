@@ -10,28 +10,28 @@
 # *instance variable
 # *class variable
 
-class humanbeing #*classname
+class HumanBeing #*classname
   #counts the number of instances created
-  HBCOUNTER = 0 #*class variable
+  @@hbcounter = 0 #*class variable
   def initialize
-    HBCOUNTER += 1
+    @@hbcounter += 1
   end
   #getter function
-  def Name #*function
-    $1name + " " + 2name
+  def name #*function
+    @first_name + " " + @second_name #*instance variable
   end
   #setter functions
-  def firstname(name)
-    $1name = name
+  def first_name(name) #*method
+    @first_name = name
   end
-  def secondname(name)
-    2name = name
+  def second_name(name)
+    @second_name = name
   end
 end
 
-@Person = humanbeing.new
+person = HumanBeing.new
 
-@Person.firstname("Peter")
-@Person.secondname("Petersen")
+person.first_name("Peter")
+person.second_name("Petersen")
 
-puts @Person.Name
+puts person.name
