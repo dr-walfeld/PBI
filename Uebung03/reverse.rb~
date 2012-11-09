@@ -18,8 +18,8 @@ end
 
 # Iteration ueber Dateiliste
 filelist.each do |filename|
-  puts "Reverse Ausgabe der Datei '#{filename}':"
-  puts "---------------------------------------------------------------------"
+  #puts "Reverse Ausgabe der Datei '#{filename}':"
+  #puts "---------------------------------------------------------------------"
   begin
     contentfile = File.open(filename, "r")
   rescue
@@ -29,6 +29,6 @@ filelist.each do |filename|
   content = contentfile.readlines
   revertfile(content)
   contentfile.close
-  puts "---------------------------------------------------------------------"
-  puts "---------------------------------------------------------------------"
+  #puts "---------------------------------------------------------------------"
+  #puts "---------------------------------------------------------------------"
 end 

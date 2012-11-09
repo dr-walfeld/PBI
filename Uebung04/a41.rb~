@@ -1,0 +1,24 @@
+#! /usr/bin/env ruby
+
+def quersumme (i)
+  summe = 0
+  while i != 0
+    summe += i%10
+    i /= 10
+  end
+  return summe
+end
+
+if ARGV.empty?
+  STDERR.puts "FEHLER: keine Parameter angegeben!"
+  exit 1
+end
+
+begin
+  i = Integer(ARGV[0])
+rescue
+  STDERR.puts "FEHLER: es wurde keine Zahl angegeben!"
+  exit 1
+end
+
+puts "Quersumme von #{i}: #{quersumme(i)}"

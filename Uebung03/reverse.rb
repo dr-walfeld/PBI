@@ -9,6 +9,8 @@ def revertfile (content)
   end
 end
 
+# besser ARGF (Pipe funktioniert dann !)
+
 # Argumente uebergeben?
 if ARGV.empty?
   filelist = ["testfile"]
