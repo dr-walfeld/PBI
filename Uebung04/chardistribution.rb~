@@ -29,7 +29,7 @@ def printDistribution newline, totalcount, dist
   printf "%8s %10s %10s\n", "ASCII", "absolut", "relativ"
   dist.each_index do |i|
     if dist[i] != 0
-      printf "%8c", i.chr
+      printf "%8d", i.chr
       printf " %10d %10.2f\n", dist[i], dist[i].to_f/totalcount
     end
   end
