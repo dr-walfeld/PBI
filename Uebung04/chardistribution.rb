@@ -40,5 +40,5 @@ if ARGF.nil?
   exit 1
 end
 
-newline, totalcount, dist = distribution (ARGF)
+newline, totalcount, dist = distribution ARGF
 printDistribution(newline, totalcount, dist)

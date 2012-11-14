@@ -14,9 +14,9 @@ def distribution (fileinput)
         end
       end
     end
-  rescue
-    puts "FEHLER: Datei kann nicht gelesen werden!"
-    exit 1
+  #rescue
+  #  puts "FEHLER: Datei kann nicht gelesen werden!"
+  #  exit 1
   end
 
   return newline, totalcount, dist
@@ -40,5 +40,5 @@ if ARGF.nil?
   exit 1
 end
 
-newline, totalcount, dist = distribution (ARGF)
+newline, totalcount, dist = distribution ARGF
 printDistribution(newline, totalcount, dist)
