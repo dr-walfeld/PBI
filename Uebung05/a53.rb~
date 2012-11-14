@@ -1,0 +1,36 @@
+#! /usr/bin/env ruby
+
+def sequences_from_fasta (data)
+  seq = ''
+  sequences = []
+  data.each do |line|
+    if line.match(/>/) and not seq == ''
+      sequences.push (seq.gsub(/\s/,""))
+      seq = ''
+    elsif not line.match(/^(>|\s*$|\s*#)/)
+      seq += line
+    end
+  end
+
+  sequences.push (seq.gsub(/\s/,""))
+
+  return sequences
+end
+
+def find_cds (sequence)
+  lastp = 0
+  in_cds = False
+  start = []
+  # find start codons
+  while ((p = sequence.index(/AUG/i,lastpos)) != nil)
+    start.push (p)
+    lastp = p+1
+  end
+  # find stop codons
+  lastp = 0
+  stop = []
+  while ((p = sequence.index(/(UA[GA]|UGA)/i,lastpos)) != nil)
+    stop.push (p)
+    lastp = p+1
+  end
+
