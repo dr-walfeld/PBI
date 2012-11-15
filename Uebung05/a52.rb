@@ -1,44 +1,37 @@
 #! /usr/bin/env ruby
 
-def merge (a,b)
+def merge(a,b)
   out = []
-
-  i = 0
-  j = 0
-  while i < a.length and j < b.length
-    if a[i] < b[j]
-      out.push(a[i])
-      i += 1
-    else
-      out.push(b[j])
-      j += 1
+  while a.length > 0 or b.length > 0
+    if a.length > 0 and b.length > 0
+      if a[0] <= b[0]
+        out.push(a[0])
+        a = a[1..-1]
+      else
+        out.push(b[0])
+        b = b[1..-1]
+      end
+    elsif a.length > 0
+      out += a
+      a.clear
+    elsif b.length > 0
+      out += b
+      b.clear
     end
   end
- 
-  if i == a.length
-    max = j
-    c = b
-  else
-    max = i
-    c = a
-  end
 
-
-
-  max.upto(c.length-1) do |i|
-    out.push(c[i])
-  end
   return out
 end
   
 
 def mergesort(a)
-  if a.length == 1
+  if a.length <= 1
     return a
   end
  
-  left = a[0..a.length/2-1]
-  right = a[a.length/2..a.length-1]
+  middle = a.length/2
+  left = a[0..middle-1]
+  right = a[middle..-1]
 
   left = mergesort(left)
   right = mergesort(right)
@@ -46,6 +39,7 @@ def mergesort(a)
   return merge(left,right)
 end
 
+# extract all integer numbers from lines
 def read_int_array(lines)
   out = []
   lines.each do |line|
@@ -71,13 +65,10 @@ rescue
   exit 1
 end
 
-begin
-  a = read_int_array(content)
-rescue => err
-  puts "FEHLER: #{err}"
-  exit 1
-end
+a = read_int_array(content)
 
-puts a.sort.inspect
 b = mergesort(a)
+puts "Array sortiert mit Merge-Sort"
 puts b.inspect
+puts "Array sortiet durch Ruby-interne Funktion"
+puts a.sort.inspect

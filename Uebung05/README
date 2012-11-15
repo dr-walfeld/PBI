@@ -1,0 +1,39 @@
+Aufgabe 5.1
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Aufruf a51.rb filename
+
+sumzeile.data.ok enthaelt akzeptierte Abwandlung der Originaldatei
+sumzeile.data.notok enthaelt nicht-akzeptierte Abwandlungen der Originaldatei
+
+Da ein Hash verwendet wird, haengt die Groesse der erzeugten key-value
+Tabelle nicht von der Datei-Groesse sondern nur der Anzahl unterschiedlicher
+Keys ab.
+
+
+Aufgabe 5.2
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Aufruf a52.rb filename
+
+aus der angegebenen Datei werden ALLE Integer-Werte extrahiert und
+sowohl mit Merge-Sort als auch mit einer Ruby-internen Methode (zum Vergleich)
+sortiert
+
+
+Aufgabe 5.3
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+Aufruf a53.rb filename
+
+die Datei darf beliebig viele FASTA-Eintraege enthalten;
+es wird fuer alle Eintraege der Header und die uppercase/lowercase-Sequenz ausgegeben
+
+mRNA.fail1 und mRNA.fail2 enthalten fehlerhafte FASTA-Dateien zum test
+mRNA2.fas enthaelt verschiedene Grenzfaelle, die auftreten koennen
+
+mRNA_output.data
+gcgagcgagcAUGACGCAUGUACTUGACAUGGUUuaaggccgagugaAUGUGCAGACGCGCAuaguggcgagcuaaaaa
+Ausgabe des Programms
+gcgagcgagcAUGACGCAUGUACTUGACAUGGUUUAAggccgagugaAUGUGCAGACGCGCAUAGuggcgagcuaaaaa
+
+Der Unterschied zwischen mRNA_output.data und der Ausgabe von a53.rb ist,
+dass bei mRNA_output.data die Stop-Codons in Kleinbuchstaben dargestellt sind,
+und nicht als Teil der CDS angenommen werden.
