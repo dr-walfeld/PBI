@@ -1,0 +1,12 @@
+Aufgabe 6.1
+
+1. @ Zeichen vor Variable bedeutet Instanzvariable
+   außerhalb der class Umgebung kann nicht darauf zugegriffen werden
+   (fuer unseren Stack durchaus wuenschenswertes Verhalten)
+
+2. bei Aufruf von pop() auf leeren Stack: eine Exception wird geworfen;
+   der Programmierer kann diese Abfangen (wie in Funktion test)
+
+3. wird die rescue-Anweisung entfernt, so wird die Exception nicht
+   abgefangen, sondern die Exception wird mit Traceback angezeigt
+   und das Programm beendet.

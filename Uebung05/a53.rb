@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-def sequences_from_fasta (data)
+def sequences_from_fasta(data)
   seq = ''
   header = ''
   sequences = []
@@ -10,7 +10,7 @@ def sequences_from_fasta (data)
         if header == ''
           raise RuntimeError, "FEHLER: Datei ist keine FASTA-Datei; Header fehlt!"
         end
-        sequences.push ([header, seq.gsub(/\s/,"")])
+        sequences.push([header, seq.gsub(/\s/,"")])
         seq = ''
       end
       header = line.gsub(/\n/,"")
@@ -27,12 +27,12 @@ def sequences_from_fasta (data)
     raise RuntimeError, "FEHLER: Datei ist keine FASTA-Datei; Sequenz fehlt!"
   end
 
-  sequences.push ([header, seq.gsub(/\s/,"")])
+  sequences.push([header, seq.gsub(/\s/,"")])
 
   return sequences
 end
 
-def find_cds (sequence)
+def find_cds(sequence)
   lastp = 0
   stop = -1
   start = -1
@@ -78,7 +78,7 @@ if ARGV.empty?
 end
 
 begin
-  file = File.new (ARGV[0])
+  file = File.new(ARGV[0])
   content = file.readlines
   file.close
 rescue
@@ -94,7 +94,7 @@ rescue => err
 end
 
 sequences.each do |header,sequence|
-  edit_sequence = find_cds (sequence)
+  edit_sequence = find_cds(sequence)
   puts header
   puts edit_sequence
 end

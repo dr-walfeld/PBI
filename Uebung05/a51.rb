@@ -43,7 +43,7 @@ rescue
 end
 
 begin
-  sum_hash = parse (content)
+  sum_hash = parse(content)
 rescue => err
   puts "FEHLER: #{err}"
   exit 1
