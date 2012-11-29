@@ -1,6 +1,6 @@
 #! /usr/bin/env ruby
 
-require 'fastaiterator.rb'
+require './fastaiterator.rb'
 
 def length_distribution (fastait, binsize)
   len = 0
@@ -34,20 +34,21 @@ rescue
 end
 
 begin
+  # new fasta iterator
   my_fasta = FastaIterator.new ARGV[0]
+  # print out header and formatted sequence
   my_fasta.each do |header, sequence|
-    header.scan(/.{1,#{n}}/).each do |match|
-      puts match
-    end
+    puts header
     sequence.scan(/.{1,#{n}}/).each do |match|
       puts match
     end
   end
 
+  # new length distribution
   dist = length_distribution(my_fasta, binsize)
 
   dist.sort.each do |key, value|
-    puts "#{key*binsize+1}..#{(key+1)*binsize-1}: #{value}"
+    puts "#{key*binsize+1}..#{(key+1)*binsize}: #{value}"
   end
 
 rescue => err

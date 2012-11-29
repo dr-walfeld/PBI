@@ -1,0 +1,78 @@
+LOCUS       AF078689                 275 bp    mRNA    linear   EST 26-JUL-1999
+DEFINITION  AF078689 Arabidopsis thaliana library (Tan K) Arabidopsis thaliana
+            cDNA clone IFA2, mRNA sequence.
+ACCESSION   AF078689
+VERSION     AF078689.1  GI:5587835
+KEYWORDS    EST.
+SOURCE      Arabidopsis thaliana (thale cress)
+  ORGANISM  Arabidopsis thaliana
+            Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+            Spermatophyta; Magnoliophyta; eudicotyledons; core eudicotyledons;
+            rosids; eurosids II; Brassicales; Brassicaceae; Arabidopsis.
+REFERENCE   1  (bases 1 to 275)
+  AUTHORS   Zhao,D., Chen,D., Yang,C. and Zhai,Z.
+  TITLE     Isolation of intermediate filament-like genes from Arabidopsis
+  JOURNAL   Unpublished (1999)
+COMMENT     Contact: Tan K
+            Plant Development Biology
+            Institute of Botany
+            20 Nanxincun Xiangshan. Hai Dian, Beijing, 100871, P. R. China.
+FEATURES             Location/Qualifiers
+     source          1..275
+                     /organism="Arabidopsis thaliana"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:3702"
+                     /clone="IFA2"
+                     /clone_lib="Arabidopsis thaliana library (Tan K)"
+ORIGIN      
+        1 antnnctacn ncnncnntnn cnncnatnna antanacnna tnntnntann aatnaaannc
+       61 tanaancnnc nnanaantat ntnnataana aataacaaaa actnannnna tcatnaantt
+      121 cttcnttata ttatantttt caatctnaat ttcaattccn ccnctcncct ttttcctctc
+      181 cnccttttcc ntctctccna tctnctcccn ccnccnacct tntnatnatt atanctctna
+      241 anntccatac aannatataa aaaaaaaaaa aaaaa
+//
+
+LOCUS       C99932                   852 bp    mRNA    linear   EST 21-SEP-1999
+DEFINITION  C99932 Arabidopsis thaliana library (Motohashi R) Arabidopsis
+            thaliana cDNA clone 88, mRNA sequence.
+ACCESSION   C99932
+VERSION     C99932.1  GI:4714049
+KEYWORDS    EST.
+SOURCE      Arabidopsis thaliana (thale cress)
+  ORGANISM  Arabidopsis thaliana
+            Eukaryota; Viridiplantae; Streptophyta; Embryophyta; Tracheophyta;
+            Spermatophyta; Magnoliophyta; eudicotyledons; core eudicotyledons;
+            rosids; eurosids II; Brassicales; Brassicaceae; Arabidopsis.
+REFERENCE   1  (bases 1 to 852)
+  AUTHORS   Motohashi,R., Shinozaki,K. and Yamaguchi-Shinozaki,K.
+  TITLE     Arabidopsis thaliana YAC CIC3B1 region specific cDNA,clone 2
+  JOURNAL   Unpublished (1999)
+COMMENT     Contact: Motohashi R
+            Laboratory of Plant Molecular Biology
+            Institute of Physical and Chemical Research(RIKEN)
+            3-1-1, Koyadai, Tsukuba 305-0074, Japan.
+FEATURES             Location/Qualifiers
+     source          1..852
+                     /organism="Arabidopsis thaliana"
+                     /mol_type="mRNA"
+                     /db_xref="taxon:3702"
+                     /clone="88"
+                     /clone_lib="Arabidopsis thaliana library (Motohashi R)"
+ORIGIN      
+        1 atnrayamtc aaaaatnnan tmtanntttc atatctctcn cttttctctt catcacttcc
+       61 tcttcanctn anttcatcat tcaacanntc acaaannnca rannaatana ntacaacant
+      121 tcttacantc tcnannanaa tcttnnantn acrananant tnananaana ncnaccatcn
+      181 antaanatan tnacaataac aancttctca ntnattaaan ncanannana accctatnaa
+      241 tcctctnttt ttnannctnc tnnttacaaa tnnanattnn ttttntacnt naatnntaat
+      301 aaaaacnacn ntnnaaatna tcatatttcc ctttacncaa nnatcnaana nacaaactct
+      361 cttccattan nttnnnaant naatnttnat ctcaaactct ttntccataa tnnnaancta
+      421 cacaaatatt tnactnttac anatnnctta rttnaancna tataacaatn csaaaaaana
+      481 atnnnntttc nnacaattna ttcctcnatc aacattctac aacncnaacn aannttacct
+      541 ttnaccaann acactnnttc cttttnnntn ncynnaaaan cctttattnt ttaaaccnns
+      601 tccaccaacm aaraaaawwa ytttctwtym mtyytccaac aysytycccw wcsaatnttt
+      661 tttcccttnn naaaaanacc tncntttcct cctacctttn nnaaaaanaa anttcntttt
+      721 tactcccnaa tnaattttcc ccctttnnaa aaaccnaatn cctnnttnna cttannaatt
+      781 ttaacccccn aaannnnnaa tnnaannaaa naaaaaaccc ctttncccnt tcccaatcct
+      841 tccctanttt nc
+//
+

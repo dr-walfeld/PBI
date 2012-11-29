@@ -2,14 +2,15 @@
 
 class FastaIterator
   def initialize (fname)
-    @filename = fname
-    @sequences = nil
+    begin
+      @filename = fname
+      @sequences = parse_file 
+    rescue
+      raise RuntimeError, "could not open file #{fname}!"
+    end
   end
 
   def each ()
-    if not @sequences
-      parse_file
-    end
     @sequences.each do |header, sequence|
       yield header, sequence
     end  
