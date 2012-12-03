@@ -1,0 +1,2 @@
+./split_mol2.rb:86:in `parse_options': ambiguous option: -name (OptionParser::AmbiguousOption)
+	from ./split_mol2.rb:97:in `<main>'
