@@ -28,7 +28,7 @@ def parse_mol2(filename, names, numbers)
     names.select {|name| name != foundname}
 
     numbers.each do |num|
-      if num == i
+      if num == i+1
         foundnumber = num
       end
     end
@@ -43,6 +43,13 @@ def parse_mol2(filename, names, numbers)
           puts line
         end
       end
+    end
+
+    # if there are no more names or numbers are empty or all numbers
+    # are less than current index => we are done
+    if names.empty? and (numbers.empty? or numbers.max < i)
+      file.close
+      return
     end
    
   end

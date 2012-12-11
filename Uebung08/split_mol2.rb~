@@ -44,6 +44,13 @@ def parse_mol2(filename, names, numbers)
         end
       end
     end
+
+    # if there are no more names or numbers are empty or all numbers
+    # are less than current index => we are done
+    if names.empty? and (numbers.empty? or numbers.max < i)
+      file.close
+      return
+    end
    
   end
 

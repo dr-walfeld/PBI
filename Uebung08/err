@@ -1,1 +1,6 @@
+<<<<<<< HEAD
 ruby: No such file or directory -- ./split_mol2.rb (LoadError)
+=======
+./split_mol2.rb:86:in `parse_options': ambiguous option: -name (OptionParser::AmbiguousOption)
+	from ./split_mol2.rb:97:in `<main>'
+>>>>>>> dd54cbd1b56d0a047a0b7c5e70dec09002a413df
