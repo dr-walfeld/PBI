@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
 
 #define NUMOFBITS 32
 
+/* convert bitvector to decimal number */
 unsigned int bitvector2decimal(const char* bitvector)
 {
+  /* check bitvector length */
   if (bitvector[NUMOFBITS] != '\0')
   {
     printf("ERROR: bitvector %s not of length %d!\n", bitvector, NUMOFBITS);
@@ -15,8 +16,10 @@ unsigned int bitvector2decimal(const char* bitvector)
   int i;
   unsigned int pot = 1;
   unsigned int result = 0;
+  /* start with 2^0 = 1 (last bit in bitvector) */
   for (i = NUMOFBITS-1; i >= 0; i--)
   {
+    /* bitvector may contain only '0' and '1' (and terminating \0) */
     if (bitvector[i] != '0' && bitvector[i] != '1')
     {
       printf("ERROR: %c is no allowed character of bitvector!\n", bitvector[i]);
@@ -29,13 +32,17 @@ unsigned int bitvector2decimal(const char* bitvector)
   return result;
 }
 
+/* build bit vector from unsigned int */
 void decimal2bitvector(char* bitvector, unsigned int n)
 {
+  /* highest exponent is NUMOFBITS-1 */
   unsigned int exp = NUMOFBITS-1;
-  unsigned int pot = 1 << exp;
+  unsigned int pot;
 
-  for (;pot > 0; pot /= 2)
+  /* start at first bit with 2^(NUMOFBITS-1) */
+  for (pot = 1 << exp; pot > 0; pot /= 2, exp--)
   {
+    /* if 2^exp fits into n => subtract and set bitvector position to '1' */
     if (n >= pot)
     {
       n -= pot;
@@ -45,23 +52,29 @@ void decimal2bitvector(char* bitvector, unsigned int n)
     {
       bitvector[NUMOFBITS-1-exp] = '0';
     }
-
-    exp--;
   }
 
+  /* terminating \0 */
   bitvector[NUMOFBITS] = '\0';
 }
 
 int main()
 {
   unsigned int m,n;
+  /* allocate memory for bitvector */
   char* bitvector = (char*) malloc ((NUMOFBITS+1)*sizeof(char));
+  /* look at numbers 0..n^23-1 */
   unsigned int N = 1 << 24;
   for (n = 0; n < N; n++)
   {
     decimal2bitvector(bitvector,n);
     m = bitvector2decimal(bitvector);
-    //printf("%s\n",bitvector);
+    /* show first 100 results */
+    if (n < 100)
+    {
+      printf("%2d ^= %s\n",m,bitvector);
+    }
+    /* check if n and recalculated value from bitvector match */
     if (m != n)
     {
       printf("test failed (%d != %d)!\n", n, m);
