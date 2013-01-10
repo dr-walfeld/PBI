@@ -26,7 +26,7 @@ unsigned int bitvector2decimal(const char* bitvector)
       return -1;
     }
     result += (bitvector[i]-'0')*pot;
-    pot *= 2;
+    pot <<= 1;
   }
 
   return result;
@@ -40,7 +40,7 @@ void decimal2bitvector(char* bitvector, unsigned int n)
   unsigned int pot;
 
   /* start at first bit with 2^(NUMOFBITS-1) */
-  for (pot = 1 << exp; pot > 0; pot /= 2, exp--)
+  for (pot = 1 << exp; pot > 0; pot >>= 1, exp--)
   {
     /* if 2^exp fits into n => subtract and set bitvector position to '1' */
     if (n >= pot)
@@ -58,12 +58,12 @@ void decimal2bitvector(char* bitvector, unsigned int n)
   bitvector[NUMOFBITS] = '\0';
 }
 
-int main()
+int test()
 {
   unsigned int m,n;
   /* allocate memory for bitvector */
   char* bitvector = (char*) malloc ((NUMOFBITS+1)*sizeof(char));
-  /* look at numbers 0..n^23-1 */
+  /* look at numbers 0..n^24-1 */
   unsigned int N = 1 << 24;
   for (n = 0; n < N; n++)
   {
@@ -78,6 +78,7 @@ int main()
     if (m != n)
     {
       printf("test failed (%d != %d)!\n", n, m);
+      free(bitvector);
       return 1;
     }
   }
@@ -85,4 +86,11 @@ int main()
 
   free(bitvector);
   return 0;
+}
+
+int main()
+{
+  int status = test();
+
+  return status;
 }

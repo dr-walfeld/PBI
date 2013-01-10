@@ -32,9 +32,9 @@ int main(int argc, char* argv[])
   }
 
   /* calculate digit sum */
-  unsigned int qs = quersumme((unsigned int) n);
+  unsigned int ds = quersumme((unsigned int) n);
 
-  printf("qs from %d = %d\n", n, qs);
+  printf("ds of %d = %d\n", n, ds);
 
   return 0;
 }

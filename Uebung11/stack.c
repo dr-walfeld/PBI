@@ -25,14 +25,14 @@ Stackelement* stackelement_new()
   Stackelement *se;
   se = malloc(sizeof(Stackelement));
   assert(se);
-  /* FILLIN initialization */
+  /* initialize next element with NULL */
   se->next = NULL;
   return se;
 }
 
 void stackelement_delete(Stackelement* se)
 {
-  /* FILLIN free memory */
+  /* free memory and set pointer to NULL*/
   if (se != NULL)
   {
     free(se);
@@ -45,14 +45,14 @@ Stack* stack_new()
   Stack *s;
   s = malloc(sizeof(Stack));
   assert(s);
-  /* FILLIN initialization */
+  /* initialize first element with NULL */
   s->top = NULL;
   return s;
 }
 
 void stack_delete(Stack *s)
 {
-  /* FILLIN free memory */
+  /* delete all elements starting from top */
   if (s != NULL)
   {
     Stackelement* se = s->top;
@@ -71,7 +71,7 @@ void stack_delete(Stack *s)
 void stack_push(Stack *s, unsigned int data)
 {
   assert(s);
-  /* FILLIN store data */
+  /* create new stackelement, write data and set element to top of stack */
   Stackelement* se = stackelement_new();
   se->data = data;
   se->next = s->top;
@@ -82,9 +82,9 @@ unsigned int stack_pop(Stack *s)
 {
   unsigned int retval;
   assert(s);
-  /* FILLIN assert stack is not empty */
+  /* assert stack is not empty */
   assert(!stack_is_empty(s));
-  /* FILLIN return data and update stack */
+  /* store data-value, set top to next element and delete old top element */
   Stackelement* se = s->top;
   retval = se->data;
   s->top = se->next;
@@ -96,8 +96,8 @@ unsigned int stack_pop(Stack *s)
 int stack_is_empty(Stack *s)
 {
   assert(s);
+  /* stack is empty if first element is NULL */
   return (s->top == NULL);
-  /* FILLIN return 1 if stack is empty */
 }
 
 /* test the stack. returns 0 if stack is good, 1 else */
