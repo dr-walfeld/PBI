@@ -1,0 +1,90 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+
+#define NUMOFBITS 32
+
+/* convert basenumber to decimal number */
+unsigned int basenumber2decimal(unsigned int base, const char* basevector)
+{
+  int i;
+  unsigned int pot = 1;
+  unsigned int result = 0;
+
+  /* check basevector length */
+  if (basevector[NUMOFBITS] != '\0')
+  {
+    printf("ERROR: basevector %s not of length %d!\n", basevector, NUMOFBITS);
+    return -1;
+  }
+
+  /* start with base^0 = 1 (last bit in bitvector) */
+  for (i = NUMOFBITS-1; i >= 0; i--)
+  {
+    /* bitvector may contain only '0' and '1' (and terminating \0) */
+    if (basevector[i] < '0' || basevector[i] > '0'+base)
+    {
+      printf("ERROR: %c is no allowed character of bitvector!\n", bitvector[i]);
+      return -1;
+    }
+    result += (basevector[i]-'0')*pot;
+    pot *= base;
+  }
+
+  return result;
+}
+
+/* build bit vector from unsigned int */
+void decimal2basenumber(unsigned int base, char* basevector, unsigned int n)
+{
+  /* highest exponent is NUMOFBITS-1 */
+  unsigned int exp = NUMOFBITS-1;
+  unsigned int pot = (unsigned int) pow(base,exp);
+
+  /* start at first bit with 2^(NUMOFBITS-1) */
+  for (; pot > 0; pot /= base, exp--)
+  {
+    basevector[NUMOFBITS-1-exp] = n/pot + '0';
+    n %= pot;
+  }
+
+  /* terminating \0 */
+  basevector[NUMOFBITS] = '\0';
+}
+
+int test()
+{
+  unsigned int m,n;
+  /* allocate memory for bitvector */
+  char* bitvector = (char*) malloc ((NUMOFBITS+1)*sizeof(char));
+  /* look at numbers 0..n^24-1 */
+  unsigned int N = 1 << 24;
+  for (n = 0; n < N; n++)
+  {
+    decimal2bitvector(bitvector,n);
+    m = bitvector2decimal(bitvector);
+    /* show first 100 results */
+    if (n < 100)
+    {
+      printf("%2d ^= %s\n",m,bitvector);
+    }
+    /* check if n and recalculated value from bitvector match */
+    if (m != n)
+    {
+      printf("test failed (%d != %d)!\n", n, m);
+      free(bitvector);
+      return 1;
+    }
+  }
+  printf("test passed!\n");
+
+  free(bitvector);
+  return 0;
+}
+
+int main()
+{
+  int status = test();
+
+  return status;
+}

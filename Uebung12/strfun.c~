@@ -1,0 +1,79 @@
+#include <stdlib.h>
+#include "strfun.h"
+
+char* mystrchr(const char* s, int c)
+{
+  while(*s != '\0')
+  {
+    if (*s == c)
+      return (char*)s;
+    s++;
+  }
+  return NULL;
+}
+
+char* mystrrchr(const char* s, int c)
+{
+  char* found = NULL;
+
+  while (*s != '\0')
+  {
+    if(*s == c)
+      found = (char*)s;
+    s++;
+  }
+  return found;
+}
+
+char* mystrpbrk(const char* s, const char* accept)
+{
+  const char* sa;
+  while(*s != '\0')
+  {
+    sa = accept;
+    while(*sa != '\0')
+    {
+      if (*s == *sa)
+        return (char*)s;
+      sa++;
+    }
+    s++;
+  }
+  return NULL;
+}
+
+size_t mystrspn(const char* s, const char* accept)
+{
+  const char* sa;
+  char* found;
+  size_t length = 0;
+
+  while(*s != '\0')
+  {
+    sa = accept;
+    found = NULL;
+    while(*sa != '\0')
+    {
+      if (*s == *sa)
+        found = (char*)s;
+      sa++;
+    }
+    if (found == NULL)
+      return length;
+    length++;
+    s++;
+  }
+
+  return length;
+}
+
+int mystrncmp(const char* s1, const char* s2, size_t n)
+{
+  unsigned int i;
+  int diff = 0;
+  for (i = 0; i < n && s1[i] != '\0' && s2[i] != '\0' && diff == 0; i++)
+  {
+    diff = s1[i]-s2[i];
+  }
+  return diff;
+}
