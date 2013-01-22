@@ -40,7 +40,7 @@ static int calculateEditDistance(char *string_a, int length_a,
   free(matrix[0]);
   free(matrix);
 
-  returnretval;
+  return retval;
 }
 
 

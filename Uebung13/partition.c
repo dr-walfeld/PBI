@@ -6,13 +6,15 @@
 #define SEEDVALUE 42349421
 #define MAXVALUE 10000
 
+/* structure representing partition */
 typedef struct {
-  unsigned int *values,*intermediates;
-  unsigned int nofelements;
-  unsigned int totalsum, partsum;
-  char* isinA;
+  unsigned int *values,*intermediates; /* values and intermediates */
+  unsigned int nofelements; /* number of values */
+  unsigned int totalsum, partsum; /* total sum and partial sum */
+  char* isinA; /* is element i in A or B */
 } Partition;
 
+/* initialize new partition */
 Partition* partition_initialize(unsigned int nofelements)
 {
   Partition* part = malloc(sizeof(Partition));
@@ -29,7 +31,10 @@ Partition* partition_initialize(unsigned int nofelements)
   return part;
 }
 
-unsigned int generate_random_numbers(unsigned int* values, unsigned int nofelements, unsigned int maxvalue, long int seed)
+/* generate nofelements random numbers (1..maxvalue) and save to values 
+   returns sum of generated randon numbers */
+unsigned int generate_random_numbers(unsigned int* values, 
+    unsigned int nofelements, unsigned int maxvalue, long int seed)
 {
   unsigned int i, sum = 0;
   srand48(seed);
@@ -43,22 +48,26 @@ unsigned int generate_random_numbers(unsigned int* values, unsigned int nofeleme
   return sum;
 }
 
+/* free memorz of partition */
 void partition_delete(Partition* part)
 {
   if (part != NULL)
   {
     free(part->values);
     free(part->isinA);
+    free(part->intermediates);
     free(part);
   }
 }
 
+/* show partition part on stdout (A: which = 0, B: which = 1, A&B: which = 2) */
 void partition_show(Partition* part, int which)
 {
   int i;
   for (i = 0; i < part->nofelements; i++)
   {
-    if ((which == 0 && part->isinA[i]) || (which == 1 && !part->isinA[i]))
+    if (which == 2 || (which == 0 && part->isinA[i]) 
+        || (which == 1 && !part->isinA[i]))
     {
       printf("%u ", part->values[i]);
     }
@@ -66,6 +75,26 @@ void partition_show(Partition* part, int which)
   printf("\n");
 }
 
+/* check if partition is correct;
+   return 0 if correct, 1 otherwise */
+int partition_validate(Partition* part)
+{
+  unsigned int sumA = 0, sumB = 0, i;
+
+  for (i = 0; i < part->nofelements; i++)
+  {
+    if (part->isinA[i])
+      sumA += part->values[i];
+    else
+      sumB += part->values[i];
+  }
+
+  return !(sumA == sumB && sumA+sumB == part->totalsum);
+}
+
+/* recursive function for calculation of partition;
+   set brachandbound = 1 for use of branch&bound;
+   return -1 if no partition possible and 0 otherwise */
 int makepartition(Partition* part, int nextelem, int branchandbound)
 {
   int success;
@@ -82,7 +111,8 @@ int makepartition(Partition* part, int nextelem, int branchandbound)
     success = 0;
   /* look ahead if the target could be reached by
      summing up all following values (check lower bound) */
-  else if (branchandbound && nextelem < part->nofelements && part->partsum < part->intermediates[nextelem])
+  else if (branchandbound && nextelem < part->nofelements 
+      && part->partsum < part->intermediates[nextelem])
     success = -1;
   /* if partsum still smaller than totalsum/2 =>
      call makepartition recusively, if elements left;
@@ -128,7 +158,9 @@ int makepartition(Partition* part, int nextelem, int branchandbound)
   return success;
 }
 
-/* calculate intermediate threshold values */
+/* calculate intermediate threshold values:
+   which value has to be reached at position i
+   so the target could be reached with sum i..nofelements-1 */
 void calculate_intermediates(unsigned int* values, unsigned int* intermediates, 
     unsigned int nofelements, unsigned int threshold)
 {
@@ -143,22 +175,32 @@ void calculate_intermediates(unsigned int* values, unsigned int* intermediates,
   }
 }
 
-/* calculate partition given number of elements */
-int test_number(int nofelements, int branchandbound, int printout)
+/* calculate partition of random numbers given number of elements;
+   branchandbound specifies usage of branch&bound by partition function
+   and values are printed on stdout, if printout is set; results are validated
+   if validate is set;
+   returns return-value of makepartition */
+int test_number(int nofelements, int branchandbound, int printout, int validate)
 {
   Partition* part;
   int result;
 
   part = partition_initialize(nofelements);
-  part->totalsum = generate_random_numbers(part->values, part->nofelements, MAXVALUE, SEEDVALUE);
+  /* generate random numbers */
+  part->totalsum = generate_random_numbers(part->values, part->nofelements, 
+      MAXVALUE, SEEDVALUE);
+
+  /* calculate intermediate scores only if branch&bound is used */
   if (branchandbound)
   {
     calculate_intermediates(part->values, part->intermediates, part->nofelements,
         part->totalsum >> 1);
   }
   
+  /* try partitioning part */
   result = makepartition(part,0,branchandbound);
 
+  /* show results */
   if (printout)
   {
     if (result)
@@ -179,15 +221,28 @@ int test_number(int nofelements, int branchandbound, int printout)
     }
   }
 
+  /* test validity if partition was possible */
+  if(validate && !result)
+  {
+    assert(!partition_validate(part));
+  }
+
+  /* free memory */
   partition_delete(part);
 
   return result;
 }
 
-void benchmark(int nofelements)
-{
-}
-
+/* test partitioning;
+   parameters: number of elements and test-mode;
+   test-mode:
+     0: calculate partition for array with nofelements and show results
+     1: calculate partition for array (1 upto nofelements) with and 
+        without branch&bound and compare and check results
+     2: calculate partition for array (1 upto nofelements) without
+        branch&bound for benchmark
+     3: same as 2 WITH branch&bound
+*/
 int main(int argc, char* argv[])
 {
   unsigned int nofelements,mode,i;
@@ -213,19 +268,22 @@ int main(int argc, char* argv[])
 
   if (mode == 0)
   {
-    test_number(nofelements,0,1);
-    test_number(nofelements,1,1);
+    test_number(nofelements,0,1,0);
+    test_number(nofelements,1,1,0);
   }
   else
   {
     for (i = 1; i <= nofelements; i++)
     {
+      /* test if correct */
       if (mode == 1)
-        assert(test_number(nofelements,0,0) == test_number(nofelements,1,0));
+        assert(test_number(i,0,0,1) == test_number(i,1,0,1));
+      /* benchmark w/o b&b */
       else if (mode == 2)
-        test_number(nofelements,0,0);
+        test_number(i,0,0,0);
+      /* benchmark with b&b */
       else if (mode == 3)
-        test_number(nofelements,1,0);
+        test_number(i,1,0,0);
     }
   }
 

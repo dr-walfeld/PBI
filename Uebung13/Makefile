@@ -1,5 +1,4 @@
 CFLAGS?=-Wall -Werror -g -O3
-LDFLAGS?=-lm
 
 all: partition.x
 

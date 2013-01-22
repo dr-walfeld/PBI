@@ -3,10 +3,12 @@
 
 static int calculateEditDistance(char *string_a, int length_a,
                                  char *string_b, int length_b){
+  /* reserve memory for DP-table */
   int** matrix = malloc((length_a+1)*sizeof(int*));
   int* row = malloc((length_a+1)*(length_b+1)*sizeof(int));
   int i,j,equal,replacement,insertion,deletion,retval;
 
+  /* set pointers and initialize first row/column */
   for(i = 0; i<= length_a; i++)
   {
     matrix[i] = row;
@@ -19,6 +21,7 @@ static int calculateEditDistance(char *string_a, int length_a,
     matrix[0][i] = i;
   }
 
+  /* fill DP-table */
   for(i = 1; i <= length_a; i++)
   {
     for(j = 1; j <= length_b; j++)
@@ -28,6 +31,7 @@ static int calculateEditDistance(char *string_a, int length_a,
       deletion = matrix[i][j-1] + 1;
       replacement = equal+1;
 
+      /* when using unit costs replacement of equal bases if always minimal */
       if (string_a[i-1] == string_b[j-1])
         matrix[i][j] = equal;
       else
@@ -35,8 +39,10 @@ static int calculateEditDistance(char *string_a, int length_a,
     }
   }
 
+  /* edit distance */
   retval = matrix[length_a][length_b];
 
+  /* free memory */
   free(matrix[0]);
   free(matrix);
 

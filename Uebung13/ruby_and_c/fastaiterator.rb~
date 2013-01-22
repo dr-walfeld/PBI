@@ -1,6 +1,7 @@
 # fasta iterator
 
 class FastaIterator
+  include Enumerable
   def initialize (fname)
     begin
       @filename = fname

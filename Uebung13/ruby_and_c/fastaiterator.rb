@@ -1,7 +1,7 @@
 # fasta iterator
 
 class FastaIterator
-  include Enumerable
+  include Enumerable # each is defined
   def initialize (fname)
     begin
       @filename = fname
@@ -23,6 +23,7 @@ class FastaIterator
 
   private
 
+  # parse FASTA file
   def parse_file ()
     @sequences = []
     header = ""
