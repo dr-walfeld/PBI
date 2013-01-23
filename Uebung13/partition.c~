@@ -277,13 +277,13 @@ int main(int argc, char* argv[])
     {
       /* test if correct */
       if (mode == 1)
-        assert(test_number(nofelements,0,0,1) == test_number(nofelements,1,0,1));
+        assert(test_number(i,0,0,1) == test_number(i,1,0,1));
       /* benchmark w/o b&b */
       else if (mode == 2)
-        test_number(nofelements,0,0,0);
+        test_number(i,0,0,0);
       /* benchmark with b&b */
       else if (mode == 3)
-        test_number(nofelements,1,0,0);
+        test_number(i,1,0,0);
     }
   }
 

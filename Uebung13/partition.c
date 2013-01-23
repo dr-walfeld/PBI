@@ -48,7 +48,7 @@ unsigned int generate_random_numbers(unsigned int* values,
   return sum;
 }
 
-/* free memorz of partition */
+/* free memory of partition */
 void partition_delete(Partition* part)
 {
   if (part != NULL)
@@ -117,20 +117,18 @@ int makepartition(Partition* part, int nextelem, int branchandbound)
   /* if partsum still smaller than totalsum/2 =>
      call makepartition recusively, if elements left;
      calls to makepartition with nextelem == part->nofelements
-     are either successfull or fall through to else case */
+     were either successfull or fall through to else case */
   else if (nextelem < part->nofelements)
   {
     /* if partition without current element successfull
        => try with current element */
     if(makepartition(part,nextelem+1,branchandbound))
     {
-      part->isinA[nextelem] = 1;
       part->partsum += part->values[nextelem];
       /* if partition with current element also not
          successfull => move up in recursive tree */
       if(makepartition(part,nextelem+1,branchandbound))
       {
-        part->isinA[nextelem] = 0;
         part->partsum -= part->values[nextelem];
         success = -1;
       }
@@ -139,6 +137,7 @@ int makepartition(Partition* part, int nextelem, int branchandbound)
       else
       {
         success = 0;
+        part->isinA[nextelem] = 1;
       }
     }
     /* if partition without current element successfull
