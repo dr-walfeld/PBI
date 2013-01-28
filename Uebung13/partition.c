@@ -120,7 +120,7 @@ int makepartition(Partition* part, int nextelem, int branchandbound)
      were either successfull or fall through to else case */
   else if (nextelem < part->nofelements)
   {
-    /* if partition without current element successfull
+    /* if partition without current element not successfull
        => try with current element */
     if(makepartition(part,nextelem+1,branchandbound))
     {
@@ -212,7 +212,8 @@ int test_number(int nofelements, int branchandbound, int printout, int validate)
     else
     {
       printf("Die Zahlenmenge der Groesse %u kann in\n" , part->nofelements);
-      printf("zwei Untermengen mit der Summe %u aufgeteilt werden:\n", part->totalsum >> 2);
+      printf("zwei Untermengen mit der Summe %u aufgeteilt werden:\n", 
+          part->totalsum >> 1);
       printf("Zahlen in Untermenge A:\n");
       partition_show(part,0);
       printf("Zahlen in Untermenge B:\n");
@@ -261,13 +262,13 @@ int main(int argc, char* argv[])
 
   if (sscanf(argv[2], "%u", &mode) != 1 || (mode < 0 || mode > 3))
   {
-    fprintf(stderr,"ERROR: %s is no valid parameter for benchmark (0 or 1)!\n",
+    fprintf(stderr,"ERROR: %s is no valid parameter for benchmark (0..3)!\n",
         argv[2]);
   }
 
   if (mode == 0)
   {
-    test_number(nofelements,0,1,0);
+    /* calculate with branch and bound and show results */
     test_number(nofelements,1,1,0);
   }
   else
@@ -276,14 +277,24 @@ int main(int argc, char* argv[])
     {
       /* test if correct */
       if (mode == 1)
+      {
+        /* calculate and validate with and without branch and bound */
         assert(test_number(i,0,0,1) == test_number(i,1,0,1));
+      }
       /* benchmark w/o b&b */
       else if (mode == 2)
+      {
+        /* calculate without branch and bound */
         test_number(i,0,0,0);
+      }
       /* benchmark with b&b */
       else if (mode == 3)
+      {
+        /* calculate with branch and bound */
         test_number(i,1,0,0);
+      }
     }
+    printf("test finished!\n");
   }
 
   return 0;

@@ -1,6 +1,6 @@
 CFLAGS?=-Wall -Werror -g -O3
 
-all: partition.x partition_new.x
+all: partition.x
 
 %.x: %.o
 	${CC} ${LDFLAGS} -o $@ $<
